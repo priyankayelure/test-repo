@@ -1,0 +1,25 @@
+import boto3
+
+aws_mag_com_root=boto3.session.Session(profile_name="root")
+#aws_mag_com_root=boto3.session.Session(profile_name="iam_user")
+
+iam_con_res=aws_mag_com_root.resource(service_name='iam',region_name="us-east-1")
+iam_con_cli=aws_mag_com_root.client(service_name='iam',region_name="us-east-1")
+
+#listing iam users with resourse object:
+
+for each_user in iam_con_res.users.all():
+    print(each_user.name)
+
+
+default session:
+===============
+
+import boto3
+iam_con_res=boto3.resource(service_name="iam") 
+
+custom session
+===============
+
+aws_mag_con=boto3.session.Session(profile_name="root")
+ec2=aws_mag_con.resource('ec2')
